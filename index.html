@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Babylonica&family=Dancing+Script&family=Josefin+Sans:ital@1&family=Lato:wght@400;700&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        html {
+            font-size: 100%;
+        }
+
+        @media(max-width:2900px) {
+            html {
+                font-size: 100%;
+            }
+        }
+
+        @media(max-width:1416px) {
+            html {
+                font-size: 70%;
+            }
+        }
+
+        @media(max-width:988px) {
+            html {
+                font-size: 55%;
+            }
+        }
+
+        @media(max-width:768px) {
+            html {
+                font-size: 45%;
+            }
+        }
+
+        @media(max-width:640px) {
+            html {
+                font-size: 35%;
+            }
+        }
+
+        body
+        {
+            background-color: rgb(160, 198, 187);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #container {
+            background-color: rgb(43, 226, 208);
+            height: 31.25rem;
+            width: 62.5rem;
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            /* border-radius: 20px; */
+            border-top-right-radius: 1.25rem;
+            border-bottom-left-radius: 1.25rem;
+
+
+            box-shadow: 0.375rem 0.625rem rgb(252, 165, 71);
+        }
+
+        #innerdiv {
+
+            height: 6.25rem;
+            width: 25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem;
+            margin-bottom: 1.25rem;
+        }
+
+        #btn1 {
+            background-color: rgb(202, 127, 255);
+            height: 3.125rem;
+            width: 5rem;
+            border-radius: 0.9375rem;
+            box-shadow: 0.1875rem 0.3125rem rgba(34, 35, 33, 0.389);
+        }
+
+        #btn2 {
+            background-color: burlywood;
+            height: 3.125rem;
+            width: 5rem;
+            border-radius: 0.9375rem;
+            box-shadow: 0.1875rem 0.3125rem rgba(34, 35, 33, 0.389);
+        }
+
+        #btn3 {
+            background-color: chocolate;
+            height: 3.125rem;
+            width: 5rem;
+            border-radius: 0.9375rem;
+            box-shadow: 0.1875rem 0.3125rem rgba(34, 35, 33, 0.389);
+        }
+
+        #btn4 {
+            background-color: rgb(230, 207, 35);
+            height: 3.125rem;
+            width: 5rem;
+            border-radius: 0.9375rem;
+            box-shadow: 0.1875rem 0.3125rem rgba(34, 35, 33, 0.389);
+        }
+
+        .time {
+            font-size: 5rem;
+        }
+
+        #container2 {
+            border-radius: 0.9375rem;
+            background-color: rgb(84, 94, 95);
+            height: auto;
+            width: 31.25rem; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="innerdiv">
+            <span class="time" id="spn1">00</span>
+            <span class="time">:</span>
+            <span class="time" id="spn2">00</span>
+            <span class="time">:</span>
+            <span class="time" id="spn3">00</span>
+
+        </div>
+        <span>
+            <button id="btn1" onclick="start()">Start</button>
+            <button id="btn2" onclick="stop()">Stop</button>
+            <button id="btn3" onclick="reset()">Reset</button>
+            <button id="btn4" onclick="lap()">Lap</button>
+        </span>
+
+
+    </div>
+
+
+    <div id="container2">
+
+        <h2 style="text-align: center;">Lap Is Here ==>> </h2>
+
+    </div>
+
+
+
+
+    <script>
+
+        var count1 = 0;
+        var count2 = 0;
+        var count3 = 0;
+
+        var hour = document.getElementById("spn1");
+        var min = document.getElementById("spn2");
+        var sec = document.getElementById("spn3");
+
+        var ref
+
+        // console.log(sec.innerHTML)
+        // console.log(sec.innerText)
+
+
+        function start() {
+            ref = setInterval(increaseTime, 1000);
+
+            function increaseTime() {
+                count3++;
+
+                sec.innerText = count3;
+
+                if (count3 > 59) {
+                    count2++;
+                    count3 = 0;
+
+                    min.innerText = count2;
+                    sec.innerText = count3;
+                }
+                if (count2 > 59) {
+                    count1++;
+                    count3 = 0;
+                    count2 = 0;
+
+                    hour.innerText = count1;
+                    sec.innerText = count3;
+                    min.innerText = count2;
+                }
+
+
+            }
+        }
+
+        function stop() {
+            clearTimeout(ref);
+        }
+
+        function reset() {
+            count1 = 0;
+            count2 = 0;
+            count3 = 0;
+
+            hour.innerText = "00";
+            min.innerText = "00";
+            sec.innerText = "00";
+        }
+
+        var lapCount = 0;
+
+        function lap() {
+
+
+            var lap = document.getElementById("container2")
+
+            let span1 = document.createElement("span")
+            let span2 = document.createElement("span")
+
+            let hr = document.createElement("hr");
+
+            lapCount++;
+
+            span1.innerText = `${lapCount}. Lap${lapCount}`
+
+            if (count1 > 9) {
+                span2.innerText = `${count1} : ${count2} : ${count3}`
+            }
+            else if (count1 <= 9) {
+                span2.innerText = `0${count1} : ${count2} : ${count3}`
+            }
+            if (count2 > 9) {
+                span2.innerText = `${count1} : ${count2} : ${count3}`
+            }
+            else if (count2 <= 9) {
+                span2.innerText = `${count1} : 0${count2} : ${count3}`
+            }
+            if (count3 > 9) {
+                span2.innerText = `${count1} : ${count2} : ${count3}`
+            }
+            else if (count3 <= 9) {
+                span2.innerText = `${count1} : ${count2} : 0${count3}`
+            }
+
+
+            span1.style.padding = "100px"
+
+            lap.append(span1);
+            lap.append(span2);
+            lap.append(hr);
+
+
+            lap.oncick = (event) => {
+                addTask();
+            }
+
+
+        } -
+
+            function addTask() {
+
+            }
+
+    </script>
+
+</body>
+
+</html>
